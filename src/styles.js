@@ -1,27 +1,25 @@
 import { createTheme, makeStyles } from "@material-ui/core/styles";
 
+const primaryMain = "#0d47a1";
+const secondaryMain = "#2196f3";
+
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#0d47a1",
+      main: primaryMain,
     },
     secondary: {
-      main: "#2196f3",
+      main: secondaryMain,
     },
   },
 });
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
-    justifyContent: "center",
-  },
-
   container: {
-    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
 
-  icon: {
+  logo: {
     marginRight: "20px",
   },
 
@@ -43,6 +41,10 @@ export const useStyles = makeStyles((theme) => ({
     padding: "0 10px",
   },
 
+  cardActions: {
+    justifyContent: "center",
+  },
+
   cardMedia: {
     paddingTop: "20px",
   },
@@ -50,6 +52,42 @@ export const useStyles = makeStyles((theme) => ({
   avatar: {
     height: "100px",
     width: "100px",
+    overflow: "visible",
+    zIndex: 0,
+
+    "& img": {
+      borderRadius: "50%",
+    },
+
+    "&::before": {
+      borderRadius: "50%",
+      content: "''",
+      display: "block",
+      position: "absolute",
+      color: "#fff",
+      backgroundColor: secondaryMain,
+      height: "100%",
+      width: "100%",
+      top: "-0.25rem",
+      right: "-0.5rem",
+      zIndex: -1,
+    },
+  },
+
+  icon: {
+    color: "#fff",
+    fontSize: "1.4rem",
+    transform: "translateY(20%)",
+  },
+
+  iconSpan: {
+    width: "2rem",
+    height: "2rem",
+    placeItems: "center",
+    transform: "translate(-210%, -290%)",
+    position: "absolute",
+    borderRadius: "50%",
+    backgroundColor: secondaryMain,
   },
 
   cardContent: {
@@ -57,7 +95,6 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   footer: {
-    backgroundColor: theme.palette.background.paper,
     padding: "50px 0",
   },
 }));
