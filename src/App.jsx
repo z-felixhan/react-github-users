@@ -31,7 +31,9 @@ const App = () => {
   const classes = useStyles();
 
   const fetchData = async () => {
+    setUsers([]);
     setLoading(true);
+    setError(false);
 
     const perPage = 6;
     const random = Math.floor(Math.random() * (94329972 - perPage));
@@ -40,21 +42,31 @@ const App = () => {
     try {
       const usersResponse = await fetch(url);
       const usersData = await usersResponse.json();
-      console.log(usersResponse.status);
 
-      const result = await usersData.map(async (user, index) => {
-        const userDetailsResponse = await fetch(user.url);
-        const userDetails = await userDetailsResponse.json();
+      if (usersResponse.status >= 200 && usersResponse.status < 300) {
+        const result = await usersData.map(async (user, index) => {
+          const userDetailsResponse = await fetch(user.url);
+          const userDetails = await userDetailsResponse.json();
 
-        usersData[index] = { ...usersData[index], userDetails };
+          if (userDetailsResponse.status >= 200 && userDetailsResponse < 300) {
+            usersData[index] = { ...usersData[index], userDetails };
 
-        if (index == usersData.length - 1) {
-          setLoading(false);
-        }
-      });
+            if (index == usersData.length - 1) {
+              setLoading(false);
+            }
+          } else {
+            setError(true);
+            return;
+          }
+        });
 
-      setUsers(usersData);
-      setCurrentUsers(usersData);
+        setUsers(usersData);
+        setCurrentUsers(usersData);
+        setLoading(false);
+      } else {
+        setError(true);
+        return;
+      }
     } catch (err) {
       setError(true);
       console.log(err);
@@ -130,7 +142,7 @@ const App = () => {
               </div>
             </Container>
           </div>
-          {!error ? (
+          {!error || users.length ? (
             <Users
               loading={loading}
               classes={classes}
@@ -143,8 +155,9 @@ const App = () => {
               maxWidth="md"
               style={{ height: "25vh" }}
             >
-              <Typography>
-                <Error /> An error was encountered. Please try again later.
+              <Typography align="center" style={{ color: "#ff0000" }}>
+                <Error style={{ fontSize: "14px", margin: 0, padding: 0 }} /> An
+                error was encountered. Please try again later.
               </Typography>
             </Container>
           )}
