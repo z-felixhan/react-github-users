@@ -1,6 +1,6 @@
 # **MUI**
 
-<a href="https://z-felixhan.github.io/react-github-users"><img src="https://img.shields.io/badge/Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github" alt="GitHub Badge" target="_blank"/></a>
+<a href="https://z-felixhan.github.io/react-github-users" target="_blank"><img src="https://img.shields.io/badge/Demo-GitHub%20Pages-blue?style=for-the-badge&logo=github" alt="GitHub Badge"/></a>
 
 MUI pulls a list of 6 random GitHub users from multiple endpoints to display their biography and hireable status.
 
