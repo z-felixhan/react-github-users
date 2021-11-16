@@ -50,9 +50,9 @@ export const useStyles = makeStyles((theme) => ({
   },
 
   avatar: {
-    height: "100px",
-    width: "100px",
-    overflow: "visible",
+    height: "100px !important",
+    width: "100px !important",
+    overflow: "visible !important",
     zIndex: 0,
 
     "& img": {
