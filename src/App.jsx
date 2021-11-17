@@ -31,7 +31,7 @@ const App = () => {
   const classes = useStyles();
 
   const fetchData = async () => {
-    // setUsers([]);
+    setUsers([]);
     setLoading(true);
     setError(false);
 
