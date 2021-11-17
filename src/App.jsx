@@ -85,7 +85,7 @@ const App = () => {
           <Toolbar>
             <AccountCircle className={classes.logo} />
             <Typography title="Material UI" variant="h6">
-              MUI
+              mui
             </Typography>
           </Toolbar>
         </AppBar>
@@ -107,7 +107,7 @@ const App = () => {
                 paragraph
               >
                 A small collection of users fetched from GitHub's API using
-                React JS and designed with Material UI.
+                React and designed with Material UI.
               </Typography>
               <div className={classes.mainButtons}>
                 <Grid container spacing={2} justifyContent="center">
