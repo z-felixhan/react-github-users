@@ -31,7 +31,7 @@ const App = () => {
   const classes = useStyles();
 
   const fetchData = async () => {
-    setUsers([]);
+    // setUsers([]);
     setLoading(true);
     setError(false);
 
@@ -44,21 +44,32 @@ const App = () => {
       const usersData = await usersResponse.json();
 
       if (usersResponse.status >= 200 && usersResponse.status < 300) {
-        const result = await usersData.map(async (user, index) => {
-          const userDetailsResponse = await fetch(user.url);
-          const userDetails = await userDetailsResponse.json();
+        const result = await Promise.all(
+          usersData.map(async (user, index) => {
+            const userDetailsResponse = await fetch(user.url);
+            const userDetails = await userDetailsResponse.json();
 
-          if (userDetailsResponse.status >= 200 && userDetailsResponse < 300) {
-            usersData[index] = { ...usersData[index], userDetails };
+            console.log("userDetails: ", userDetails);
+            console.log(
+              "userDetailsResponse.status: ",
+              userDetailsResponse.status
+            );
 
-            if (index == usersData.length - 1) {
-              setLoading(false);
+            if (
+              userDetailsResponse.status >= 200 &&
+              userDetailsResponse.status < 300
+            ) {
+              usersData[index] = { ...usersData[index], userDetails };
+
+              if (index == usersData.length - 1) {
+                setLoading(false);
+              }
+            } else {
+              setError(true);
+              return;
             }
-          } else {
-            setError(true);
-            return;
-          }
-        });
+          })
+        );
 
         setUsers(usersData);
         setCurrentUsers(usersData);
